@@ -1,7 +1,7 @@
 export default () => (
   <>
     <div className="hero">
-    <h1 className="title">Offline Next.js statically exported</h1>
+      <h1 className="title">Offline Next.js statically exported</h1>
     </div>
 
     <style jsx>{`
@@ -27,4 +27,4 @@ export default () => (
       }
     `}</style>
   </>
-)
+);

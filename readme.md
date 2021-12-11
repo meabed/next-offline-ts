@@ -1,6 +1,7 @@
 <h1 align="center">
   next-offline-ts
 </h1>
+
 <h2 align="center">
   Maintained, Upgraded and improved version of next-offline, written in typescript, updated and tested to fix multiple issues in the original library
 </h2>
@@ -89,10 +90,11 @@ app.prepare()
       const { pathname } = parsedUrl
 
       // handle GET request to /service-worker.js
-      if (pathname === '/service-worker.js') {
-        const filePath = join(__dirname, '.next', pathname)
-
-        app.serveStatic(req, res, filePath)
+      if (pathname.startsWith('/service-worker.js')) {
+        const filePath = join(__dirname, '.next', pathname);
+        res.writeHead(200, { 'content-type': 'application/javascript' });
+        res.write(readFileSync(filePath).toString());
+        res.end();
       } else {
         handle(req, res, parsedUrl)
       }

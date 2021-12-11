@@ -24,7 +24,7 @@
     "build": "rm -rf dist && tsc -p .",
     "lint": "eslint \"src/**/*.ts\"",
     "prepare": "yarn husky install",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" \"__tests__/**/*.{ts,tsx,js,jsx}\"",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" \"__tests__/**/*.{ts,tsx,js,jsx}\" \"examples/**/*.{ts,tsx,js,jsx}\"",
     "test": "NODE_ENV=test jest --runInBand --forceExit"
   },
   "lint-staged": {

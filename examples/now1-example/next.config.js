@@ -1,3 +1,3 @@
-const withOffline = require('next-offline-ts')
+const withOffline = require('next-offline-ts');
 
-module.exports = withOffline()
+module.exports = withOffline();
