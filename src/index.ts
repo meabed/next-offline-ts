@@ -6,9 +6,7 @@ import { cwd } from 'process';
 import { exportSw } from './export';
 import { NextConfig } from 'next';
 import { NextConfigComplete } from 'next/dist/server/config-shared';
-import './export';
 import './register-sw';
-import './runtime';
 import './service-worker';
 
 // Next build metadata files that shouldn't be included in the pre-cache manifest.
@@ -135,5 +133,8 @@ export function nextOfflineTs(nextConfig: NextConfig = {}) {
     },
   };
 }
+
+export { exportSw } from './export';
+export { register, unregister } from './runtime';
 
 export default nextOfflineTs;
