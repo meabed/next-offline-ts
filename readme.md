@@ -1,6 +1,9 @@
 <h1 align="center">
-  next-offline
+  next-offline-ts
 </h1>
+<h2 align="center">
+WIP - upgraded and improved version of next-offline, written in typescript, updated and tested to fix multiple issues in the original library
+</h2>
 
 <p align="center">
 Use <a href='https://github.com/GoogleChrome/workbox'>Workbox</a> with <a href='https://github.com/zeit/next.js'>
@@ -8,13 +11,13 @@ Next.js</a> and <br />easily enable offline functionality in your application!
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/next-offline">
-    <img src="https://img.shields.io/npm/dy/next-offline.svg">
+  <a href="https://www.npmjs.com/package/next-offline-ts">
+    <img src="https://img.shields.io/npm/dy/next-offline-ts.svg">
   </a>
-  <a href="https://www.npmjs.com/package/next-offline">
-    <img src="https://img.shields.io/npm/v/next-offline.svg?maxAge=3600&label=next-offline&colorB=007ec6">
+  <a href="https://www.npmjs.com/package/next-offline-ts">
+    <img src="https://img.shields.io/npm/v/next-offline-ts.svg?maxAge=3600&label=next-offline&colorB=007ec6">
   </a>
-  <img src="https://img.shields.io/github/repo-size/hanford/next-offline.svg" />
+  <img src="https://img.shields.io/github/repo-size/meabed/next-offline-ts-ts.svg" />
 </p>
 
 <br/>
@@ -22,22 +25,22 @@ Next.js</a> and <br />easily enable offline functionality in your application!
 ## Installation
 
 ```sh
-$ npm install --save next-offline
+$ npm install --save next-offline-ts
 ```
 
 ```sh
-$ yarn add next-offline
+$ yarn add next-offline-ts
 ```
 
 ## Usage
 
-There are two important things to set up, first we need `next-offline` to wrap your next config.
+There are two important things to set up, first we need `next-offline-ts` to wrap your next config.
 
 If you haven't yet, create a `next.config.js` in your project.
 
 ```js
 // next.config.js
-const withOffline = require('next-offline')
+const withOffline = require('next-offline-ts')
 
 const nextConfig = {
   ...
@@ -57,12 +60,12 @@ Next we need to make sure our the application is properly serving the service wo
   - [runtime registration](#runtime-registration)
 - [Customizing service worker](#customizing-service-worker)
   - [Using workbox](#using-workbox)
-  - [next-offline options](#next-offline-options)
+  - [next-offline-ts options](#next-offline-ts-options)
 - [Cache Strategies](#cache-strategies)
 - [Service worker path](#service-worker-path)
 - [next export](#next-export)
 - [Development mode](#development-mode)
-- [Next Offline 5.0](#next-offline-50)
+- [Next Offline 5.0](#next-offline-ts-50)
 - [Contrbuting](#contributing)
 - [License](#license-(mit))
 
@@ -105,11 +108,11 @@ You can  read more about custom servers in the [Next.js docs](https://github.com
 If you're not hosting with Now, I'd probably follow the Now 1.0 approach because the custom server API can enable a lot of functionality, it just simply doesn't work well with Now 2.0 🙇‍♂️
 
 ### Now 2.0
-Because Now 2.0 works so different than the previous version, so does serving the service worker. There are a few different ways to do this, but I'd recommend checking out [this now2 example app](https://github.com/hanford/next-offline/tree/master/packages/now2-example). The changes to be aware of are in the [now.json](https://github.com/hanford/next-offline/blob/master/packages/now2-example/now.json) and [next.config.js](https://github.com/hanford/next-offline/blob/master/packages/now2-example/next.config.js).
+Because Now 2.0 works so different than the previous version, so does serving the service worker. There are a few different ways to do this, but I'd recommend checking out [this now2 example app](https://github.com/meabed/next-offline-ts/tree/master/packages/now2-example). The changes to be aware of are in the [now.json](https://github.com/meabed/next-offline-ts/blob/master/packages/now2-example/now.json) and [next.config.js](https://github.com/meabed/next-offline-ts/blob/master/packages/now2-example/next.config.js).
 
 ## Registering service worker
 ### Compile-time registration
-By default `next-offline` will register a service worker with the script below, this is automatically added to your client side bundle once `withOffline` is invoked.
+By default `next-offline-ts` will register a service worker with the script below, this is automatically added to your client side bundle once `withOffline` is invoked.
 
 ```js
 if ('serviceWorker' in navigator) {
@@ -124,10 +127,10 @@ if ('serviceWorker' in navigator) {
 ```
 
 ### Runtime registration
-Alternative to compile-time, you can take control of registering/unregistering in your application code by using the `next-offline/runtime` module.
+Alternative to compile-time, you can take control of registering/unregistering in your application code by using the `next-offline-ts/runtime` module.
 
 ```js
-import { register, unregister } from 'next-offline/runtime'
+import { register, unregister } from 'next-offline-ts/runtime'
 
 class App extends React.Component {
   componentDidMount () {
@@ -140,10 +143,10 @@ class App extends React.Component {
 }
 ```
 
-If you're handling registration on your own, pass `dontAutoRegisterSw` to next-offline.
+If you're handling registration on your own, pass `dontAutoRegisterSw` to next-offline-ts.
 ```js
 // next.config.js
-const withOffline = require('next-offline')
+const withOffline = require('next-offline-ts')
 
 module.exports = withOffline({ dontAutoRegisterSw: true })
 ```
@@ -154,11 +157,11 @@ module.exports = withOffline({ dontAutoRegisterSw: true })
 
 If you're new to workbox, I'd recommend reading this [quick guide](https://developers.google.com/web/tools/workbox/guides/generate-service-worker/webpack#adding_runtime_caching) -- anything inside of `worboxOpts` will be passed to `workbox-webpack-plugin`.
 
-Define a `workboxOpts` object in your `next.config.js` and it will gets passed to [workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#generatesw_plugin). Workbox is what `next-offline` uses under the hood to generate the service worker, you can learn more about it [here](https://developers.google.com/web/tools/workbox/).
+Define a `workboxOpts` object in your `next.config.js` and it will gets passed to [workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#generatesw_plugin). Workbox is what `next-offline-ts` uses under the hood to generate the service worker, you can learn more about it [here](https://developers.google.com/web/tools/workbox/).
 
 ```js
 // next.config.js
-const withOffline = require('next-offline')
+const withOffline = require('next-offline-ts')
 
 const nextConfig = {
   workboxOpts: {
@@ -169,8 +172,8 @@ const nextConfig = {
 module.exports = withOffline(nextConfig)
 ```
 
-### next-offline options
-On top of the workbox options, next-offline has some options built in flags to give you finer grain control over how your service worker gets generated.
+### next-offline-ts options
+On top of the workbox options, next-offline-ts has some options built in flags to give you finer grain control over how your service worker gets generated.
 
 <table>
   <thead>
@@ -185,25 +188,25 @@ On top of the workbox options, next-offline has some options built in flags to g
     <tr>
       <td>generateSw</td>
       <td>Boolean</td>
-      <td>If false, next-offline will not generate a service worker and will instead try to modify workboxOpts.swSrc</td>
+      <td>If false, next-offline-ts will not generate a service worker and will instead try to modify workboxOpts.swSrc</td>
       <td>true</td>
     </tr>
     <tr>
       <td>dontAutoRegisterSw</td>
       <td>Boolean</td>
-      <td>If true, next-offline won't automatically push the registration script into the application code. This is required if you're using runtime registration or are handling registration on your own.</td>
+      <td>If true, next-offline-ts won't automatically push the registration script into the application code. This is required if you're using runtime registration or are handling registration on your own.</td>
       <td>false</td>
     </tr>
     <tr>
       <td>devSwSrc</td>
       <td>String</td>
-      <td>Path to be registered by next-offline during development. By default next-offline will register a noop during development</td>
+      <td>Path to be registered by next-offline-ts during development. By default, next-offline-ts will register a noop during development</td>
       <td>false</td>
     </tr>
     <tr>
       <td>generateInDevMode</td>
       <td>Boolean</td>
-      <td>If true, the service worker will also be generated in development mode. Otherwise the service worker defined in devSwSrc will be used.</td>
+      <td>If true, the service worker will also be generated in development mode. Otherwise, the service worker defined in devSwSrc will be used.</td>
       <td>false</td>
     </tr>
     <tr>
@@ -222,7 +225,7 @@ On top of the workbox options, next-offline has some options built in flags to g
 </table>
 
 ## Cache strategies
-By default `next-offline` has the following blanket runtime caching strategy. If you customize `next-offline` with `workboxOpts`, the default behaviour will not be passed into `workbox-webpack-plugin`. This [article](https://developers.google.com/web/tools/workbox/guides/generate-service-worker/webpack#adding_runtime_caching) is great at breaking down various different cache recipes.
+By default `next-offline-ts` has the following blanket runtime caching strategy. If you customize `next-offline-ts` with `workboxOpts`, the default behaviour will not be passed into `workbox-webpack-plugin`. This [article](https://developers.google.com/web/tools/workbox/guides/generate-service-worker/webpack#adding_runtime_caching) is great at breaking down various different cache recipes.
 ```js
 {
   runtimeCaching: [
@@ -243,7 +246,7 @@ By default `next-offline` has the following blanket runtime caching strategy. If
 
 ```js
 // next.config.js
-const withOffline = require('next-offline')
+const withOffline = require('next-offline-ts')
 
 module.exports = withOffline({
   workboxOpts: {
@@ -270,9 +273,9 @@ module.exports = withOffline({
 ```
 
 ## Service worker path
-If your application doesn't live on the root of your domain, you can use `registerSwPrefix`. This is helpful if your application is on domain.com/my/custom/path because by default `next-offline` assumes your application is on domain.com and will try to register domain.com/service-worker.js. We can't support using `assetPrefix` because service workers must be served on the root domain. For a technical breakdown on that limitation, see the following link: [Is it possible to serve service workers from CDN/remote origin?](https://github.com/w3c/ServiceWorker/issues/940)
+If your application doesn't live on the root of your domain, you can use `registerSwPrefix`. This is helpful if your application is on domain.com/my/custom/path because by default `next-offline-ts` assumes your application is on domain.com and will try to register domain.com/service-worker.js. We can't support using `assetPrefix` because service workers must be served on the root domain. For a technical breakdown on that limitation, see the following link: [Is it possible to serve service workers from CDN/remote origin?](https://github.com/w3c/ServiceWorker/issues/940)
 
-By default `next-offline` will precache all the Next.js webpack emitted files and the user-defined static ones (inside `/static`) - essentially everything that is exported as well.
+By default `next-offline-ts` will precache all the Next.js webpack emitted files and the user-defined static ones (inside `/static`) - essentially everything that is exported as well.
 
 If you'd like to include some more or change the origin of your static files use the given workbox options:
 
@@ -286,11 +289,11 @@ workboxOpts: {
 ```
 
 ## Development mode
-By default `next-offline` will add a no-op service worker in development. If you want to provide your own pass its filepath to `devSwSrc` option. This is particularly useful if you want to test web push notifications in development, for example.
+By default `next-offline-ts` will add a no-op service worker in development. If you want to provide your own pass its filepath to `devSwSrc` option. This is particularly useful if you want to test web push notifications in development, for example.
 
 ```js
 // next.config.js
-const withOffline = require('next-offline')
+const withOffline = require('next-offline-ts')
 
 module.exports = withOffline({
   devSwSrc: '/path/to/my/dev/service-worker.js'
@@ -302,25 +305,25 @@ You can disable this behavior by setting the `generateInDevMode` option to `true
 
 ## next export
 
-In next-offline@3.0.0 we've rewritten the export functionality to work in more cases, more reliably, with less code thanks to some of the additions in Next 7.0.0!
+In next-offline-ts@6.0.0 we've rewritten the export functionality to work in more cases, more reliably, with less code thanks to some additions in Next 7.0.0!
 
 You can read more about exporting at [Next.js docs]((https://github.com/zeit/next.js#static-html-export)) but next offline should Just Work™️.
 
-## next offline 5.0
-If you're upgrading to the latest version of `next-offline` I recommend glancing at what's been added/changed inside of [Workbox in 5.x releases](https://github.com/GoogleChrome/workbox/releases) along with the 4.0 release which included the [breaking changes](https://github.com/GoogleChrome/workbox/releases/tag/v4.0.0). Next Offline's API hasn't changed, but a core dependency has!
+## next offline ts 5.0
+If you're upgrading to the latest version of `next-offline-ts` I recommend glancing at what's been added/changed inside of [Workbox in 5.x releases](https://github.com/GoogleChrome/workbox/releases) along with the 4.0 release which included the [breaking changes](https://github.com/GoogleChrome/workbox/releases/tag/v4.0.0). Next Offline's API hasn't changed, but a core dependency has!
 
 <hr />
 
-Questions? Feedback? [Please let me know](https://github.com/hanford/next-offline/issues/new)
+Questions? Feedback? [Please let me know](https://github.com/meabed/next-offline-ts/issues/new)
 
 ## Contributing
-`next-offline` is a [lerna monorepo](https://lerna.js.org/)  which uses yarn workspaces. After cloning the repo, run the following
+`next-offline-ts` is a [lerna monorepo](https://lerna.js.org/)  which uses yarn workspaces. After cloning the repo, run the following
 
 ```sh
 $ yarn bootstrap
 ```
 
-This will ensure your development version of next-offline is symlinked in the examples & tests which should allow you to quickly make changes!
+This will ensure your development version of next-offline-ts is symlinked in the examples & tests which should allow you to quickly make changes!
 
 ## License (MIT)
 
