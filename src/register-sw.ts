@@ -1,4 +1,4 @@
-if ('serviceWorker' in navigator) {
+if (typeof window != 'undefined' && 'serviceWorker' in navigator) {
   window.addEventListener('load', function () {
     navigator.serviceWorker
       .register('{REGISTER_SW_PREFIX}/service-worker.js', { scope: '{SW_SCOPE}' })

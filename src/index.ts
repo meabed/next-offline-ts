@@ -1,8 +1,8 @@
 import { GenerateSW, InjectManifest } from 'workbox-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import { readFile, writeFile } from 'fs-extra';
-import { join } from 'path';
-import { cwd } from 'process';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { cwd } from 'node:process';
 import { exportSw } from './export';
 import { NextConfig } from 'next';
 import { NextConfigComplete } from 'next/dist/server/config-shared';
@@ -113,11 +113,11 @@ export function nextOfflineTs(nextConfig: NextConfig = {}) {
           const swCompiledPath = join(__dirname, 'register-sw-compiled.js');
           // See https://github.com/zeit/next.js/blob/canary/examples/with-polyfills/next.config.js for a reference on how to add new entrypoints
           if (entries['main.js'] && !entries['main.js'].includes(swCompiledPath) && !dontAutoRegisterSw) {
-            let content = await readFile(require.resolve('./register-sw.js'), 'utf8');
+            let content = readFileSync(require.resolve('./register-sw.js'), 'utf8');
             content = content.replace('{REGISTER_SW_PREFIX}', registerSwPrefix);
             content = content.replace('{SW_SCOPE}', scope);
 
-            await writeFile(swCompiledPath, content, 'utf8');
+            writeFileSync(swCompiledPath, content, 'utf8');
 
             entries['main.js'].unshift(swCompiledPath);
           }

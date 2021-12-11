@@ -5,7 +5,7 @@ module.exports = {
   transform: {
     '\\.(ts|js)x?$': 'ts-jest',
   },
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   collectCoverage: false,
   coverageReporters: ['json', 'html'],
   modulePathIgnorePatterns: ['<rootDir>/prod_node_modules'],

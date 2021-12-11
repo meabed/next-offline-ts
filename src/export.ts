@@ -1,5 +1,5 @@
-import { copy } from 'fs-extra';
-import { join } from 'path';
+import { copyFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { NextConfig } from 'next';
 
 // Copies the generated Service Worker into the export folder if the Next.js app is being built as
@@ -11,7 +11,7 @@ export function exportSw(nextConfig: NextConfig) {
 
     if (!dev) {
       // Copy service worker from Next.js build dir into the export dir.
-      await copy(join(distDir, swDest), join(outDir, swDest));
+      copyFileSync(join(distDir, swDest), join(outDir, swDest));
     }
 
     // Run user's exportPathMap function if available.
