@@ -10,9 +10,6 @@ import { NextConfigComplete } from 'next/dist/server/config-shared';
 // Next build metadata files that shouldn't be included in the pre-cache manifest.
 const preCacheManifestBlacklist = ['react-loadable-manifest.json', 'build-manifest.json', /\.map$/];
 
-// Directory where public assets must be placed in Next projects.
-const nextAssetDirectory = 'static';
-
 const defaultInjectOpts = {
   exclude: preCacheManifestBlacklist,
   modifyURLPrefix: {
@@ -41,7 +38,7 @@ const defaultGenerateOpts = {
   ],
 };
 
-interface INextOfflineTsConfig {
+interface INextOfflineTsConfig extends NextConfig {
   webpack?: any;
   devSwSrc?: string;
   dontAutoRegisterSw?: boolean;
@@ -50,9 +47,10 @@ interface INextOfflineTsConfig {
   registerSwPrefix?: string;
   scope?: string;
   workboxOpts?: any;
+  nextAssetDirectory?: string;
 }
 
-export function nextOfflineTs(nextConfig: NextConfig = {}) {
+function nextOfflineTs(nextConfig: INextOfflineTsConfig = {}) {
   return {
     ...nextConfig,
     exportPathMap: exportSw(nextConfig),
@@ -85,6 +83,7 @@ export function nextOfflineTs(nextConfig: NextConfig = {}) {
         registerSwPrefix = '',
         scope = '/',
         workboxOpts = {},
+        nextAssetDirectory = 'public',
       } = nextConfig;
 
       const skipDuringDevelopment = context.dev && !generateInDevMode;
@@ -96,7 +95,7 @@ export function nextOfflineTs(nextConfig: NextConfig = {}) {
       } else if (!context.isServer) {
         // Only run once for the client build.
         config.plugins.push(
-          // Workbox uses Webpack's asset manifest to generate the SW's pre-cache manifest, so we need
+          // Workbox uses Webpack asset manifest to generate the SW's pre-cache manifest, so we need
           // to copy the app's assets into the Webpack context so those are picked up.
           new CopyWebpackPlugin({ patterns: [{ from: `${join(cwd(), nextAssetDirectory)}/**/*` }] }),
           generateSw ? new GenerateSW({ ...defaultGenerateOpts, ...workboxOpts }) : new InjectManifest({ ...defaultInjectOpts, ...workboxOpts }),
