@@ -50,7 +50,7 @@ interface INextOfflineTsConfig extends NextConfig {
   nextAssetDirectory?: string;
 }
 
-function nextOfflineTs(nextConfig: INextOfflineTsConfig = {}) {
+module.exports = (nextConfig: INextOfflineTsConfig = {}) => {
   return {
     ...nextConfig,
     exportPathMap: exportSw(nextConfig),
@@ -129,6 +129,4 @@ function nextOfflineTs(nextConfig: INextOfflineTsConfig = {}) {
       return config;
     },
   };
-}
-
-export default nextOfflineTs;
+};
