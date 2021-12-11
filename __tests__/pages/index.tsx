@@ -1,4 +1,4 @@
-import { register, unregister } from 'next-offline-ts';
+import { register, unregister } from 'next-offline-ts/dist/runtime';
 import React from 'react';
 
 const App = () => {

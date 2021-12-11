@@ -24,7 +24,7 @@
     "mkdirp": "^1.0.4",
     "next-compose-plugins": "^2.2.1",
     "next-manifest": "^3.0.1",
-    "next-offline-ts": "^6.0.5",
+    "next-offline-ts": "^6.0.6",
     "rimraf": "^3.0.2"
   }
 }
