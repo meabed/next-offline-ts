@@ -20,14 +20,6 @@
   },
   "license": "MIT",
   "main": "dist/index.js",
-  "files": [
-    "index.js",
-    "export.js",
-    "next-manifest.js",
-    "register-sw.js",
-    "service-worker.js",
-    "runtime.js"
-  ],
   "lint-staged": {
     "src/**/*.{ts,json}": "prettier --write",
     "__tests__/**/*.{ts}": "prettier --write",
