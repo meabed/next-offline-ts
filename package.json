@@ -1,0 +1,74 @@
+{
+  "name": "next-offline-ts",
+  "version": "6.0.0",
+  "keywords": [
+    "react",
+    "next.js",
+    "offline",
+    "service worker",
+    "pre-cache",
+    "networkFirst",
+    "cacheFirst",
+    "webpack",
+    "workbox",
+    "sw-helpers"
+  ],
+  "bugs": "https://github.com/meabed/next-offline-ts/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meabed/next-offline-ts.git"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "export.js",
+    "next-manifest.js",
+    "register-sw.js",
+    "service-worker.js",
+    "runtime.js"
+  ],
+  "lint-staged": {
+    "src/**/*.{ts,json}": "prettier --write",
+    "__tests__/**/*.{ts}": "prettier --write",
+    "./index.ts": "prettier --write"
+  },
+  "dependencies": {
+    "copy-webpack-plugin": "~10.1.0",
+    "fs-extra": "~10.0.0",
+    "workbox-webpack-plugin": "^6.4.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "~9.0.13",
+    "@types/workbox-webpack-plugin": "^5.1.8",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "^2.5.1",
+    "pretty-quick": "^3.1.2",
+    "typescript": "^4.5.3",
+    "next": ">=12",
+    "webpack": ">=5"
+  },
+  "scripts": {
+    "lint": "eslint \"src/**/*.ts\"",
+    "prepare": "yarn husky install",
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" \"__tests__/**/*.{ts,tsx,js,jsx}\""
+  },
+  "authors": [
+    "Jack Hanford",
+    "Mohamed Meabed"
+  ],
+  "tags": [
+    "react",
+    "next.js",
+    "offline",
+    "service worker",
+    "pre-cache",
+    "networkFirst",
+    "cacheFirst",
+    "webpack",
+    "workbox",
+    "sw-helpers"
+  ]
+}

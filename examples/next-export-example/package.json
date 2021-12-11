@@ -1,0 +1,18 @@
+{
+  "name": "next-export-example",
+  "private": true,
+  "version": "1.0.14",
+  "scripts": {
+    "dev": "next",
+    "dev:prodlike": "yarn export && serve -p 3000 ./out",
+    "build": "next build",
+    "export": "next build && next export"
+  },
+  "dependencies": {
+    "next": "^12.0.7",
+    "next-offline": "^5.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "serve": "^13.0.2"
+  }
+}

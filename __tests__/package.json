@@ -1,0 +1,26 @@
+{
+  "name": "next-offline-test-app",
+  "version": "1.0.14",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "clean": "rm -rf .next public/manifest",
+    "build": "next build",
+    "start": "yarn clean && yarn build && NODE_ENV=production node server.js",
+    "test": "yarn clean && jest",
+    "export": "yarn build && next export"
+  },
+  "dependencies": {
+    "mkdirp": "^1.0.4",
+    "next": "^12.0.7",
+    "next-compose-plugins": "^2.2.1",
+    "next-manifest": "^3.0.1",
+    "next-offline": "^5.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "jest": "^27.4.4"
+  }
+}
