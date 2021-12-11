@@ -1,7 +1,3 @@
-/**
-@jest-environment node
-**/
-
 const nextBuild = require('next/dist/build');
 const withManifest = require('next-manifest');
 const withOffline = require('next-offline-ts');
@@ -19,22 +15,22 @@ const remove = util.promisify(rimraf);
 const cwd = process.cwd();
 
 // Creates a RegExp for finding a file with a Next build hash.
-function getFileHashRegex(fileName, extension) {
+function getFileHashRegex(fileName: string, extension: string) {
   return new RegExp(`${fileName}([-\\w])*\\.${extension}$`);
 }
 
-function getNextBuildFilePath(filePath) {
+function getNextBuildFilePath(filePath: string) {
   return join(cwd, '.next', filePath);
 }
 
-async function readBuildFile(filePath) {
+async function readBuildFile(filePath: string) {
   return read(getNextBuildFilePath(filePath), 'utf8');
 }
 
 // Read a directory and returns the file path for the first file name matching the provided RegExp.
-async function findHashedFileName(directoryPath, regexTest) {
+async function findHashedFileName(directoryPath: any, regexTest: RegExp) {
   const files = await readdir(directoryPath);
-  return files.find((filePath) => regexTest.test(filePath));
+  return files.find((filePath: string) => regexTest.test(filePath));
 }
 
 beforeEach(async () => {

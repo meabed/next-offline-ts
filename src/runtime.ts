@@ -6,7 +6,7 @@ export function unregister() {
   }
 }
 
-export function register(swPath, options) {
+export function register(swPath: any, options: RegistrationOptions) {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
       .register(swPath || '/service-worker.js', options)

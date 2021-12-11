@@ -20,6 +20,13 @@
   },
   "license": "MIT",
   "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc -p .",
+    "lint": "eslint \"src/**/*.ts\"",
+    "prepare": "yarn husky install",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" \"__tests__/**/*.{ts,tsx,js,jsx}\"",
+    "test": "NODE_ENV=test jest --runInBand --forceExit"
+  },
   "lint-staged": {
     "src/**/*.{ts,json}": "prettier --write",
     "__tests__/**/*.{ts}": "prettier --write",
@@ -32,21 +39,18 @@
   },
   "devDependencies": {
     "@types/fs-extra": "9.0.13",
+    "@types/jest": "27.0.3",
+    "@types/prettier": "2.4.2",
     "@types/workbox-webpack-plugin": "5.1.8",
     "husky": "7.0.4",
+    "jest": "^27.4.4",
     "lint-staged": "12.1.2",
+    "next": "12.0.7",
     "prettier": "2.5.1",
     "pretty-quick": "3.1.2",
+    "ts-jest": "^27.1.1",
     "typescript": "4.5.3",
-    "next": "12.0.7",
     "webpack": "5.65.0"
-  },
-  "scripts": {
-    "build": "rm -rf dist && tsc -p .",
-    "lint": "eslint \"src/**/*.ts\"",
-    "prepare": "yarn husky install",
-    "test": "echo \"Error: no test specified\" && exit 0",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" \"__tests__/**/*.{ts,tsx,js,jsx}\""
   },
   "authors": [
     "Jack Hanford",

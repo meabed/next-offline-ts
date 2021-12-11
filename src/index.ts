@@ -3,10 +3,13 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { readFile, writeFile } from 'fs-extra';
 import { join } from 'path';
 import { cwd } from 'process';
-
 import { exportSw } from './export';
 import { NextConfig } from 'next';
 import { NextConfigComplete } from 'next/dist/server/config-shared';
+import './export';
+import './register-sw';
+import './runtime';
+import './service-worker';
 
 // Next build metadata files that shouldn't be included in the pre-cache manifest.
 const preCacheManifestBlacklist = ['react-loadable-manifest.json', 'build-manifest.json', /\.map$/];

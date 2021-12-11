@@ -1,3 +1,4 @@
+// @ts-nocheck
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 const { withPlugins } = require('next-compose-plugins');
 const withManifest = require('next-manifest');
