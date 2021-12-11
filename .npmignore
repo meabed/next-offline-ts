@@ -11,3 +11,5 @@ config.gypi
 CVS
 npm-debug.log
 src
+__tests__
+examples

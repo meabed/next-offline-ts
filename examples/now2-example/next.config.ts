@@ -1,4 +1,4 @@
-const withOffline = require('next-offline');
+const withOffline = require('next-offline-ts');
 
 const nextConfig = {
   target: 'serverless',
