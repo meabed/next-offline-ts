@@ -2,7 +2,7 @@
 const { withPlugins } = require('next-compose-plugins');
 const withManifest = require('next-manifest');
 const { withOffline } = require('next-offline-ts');
-
+const forceProd = require('./forceProd');
 const manifest = {
   output: './public/',
   short_name: 'next-offline-test-app',
@@ -23,4 +23,4 @@ const manifest = {
   background_color: '#ffffff',
 };
 
-module.exports = withPlugins([[withManifest({ manifest })], [withOffline({ dontAutoRegisterSw: true })]]);
+module.exports = withPlugins([withManifest({ manifest }), forceProd(withOffline({ dontAutoRegisterSw: true }))]);

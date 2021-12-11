@@ -3,7 +3,7 @@
   "version": "1.0.14",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev",
     "clean": "rm -rf .next public/manifest",
     "build": "next build",
     "start": "yarn clean && yarn build && NODE_ENV=production node server.js",
@@ -24,7 +24,7 @@
     "mkdirp": "^1.0.4",
     "next-compose-plugins": "^2.2.1",
     "next-manifest": "^3.0.1",
-    "next-offline-ts": "^6.0.9",
+    "next-offline-ts": "^6.0.10",
     "rimraf": "^3.0.2"
   }
 }

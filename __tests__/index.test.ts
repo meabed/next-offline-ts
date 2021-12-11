@@ -1,12 +1,7 @@
-import nextBuild from 'next/dist/build';
-import { withOffline } from 'next-offline-ts';
 import { accessSync, constants, readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
 import rimraf from 'rimraf';
-
-const withManifest = require('next-manifest');
-
-const forceProd = require('./forceProd');
+import { execSync } from 'child_process';
 
 const cwd = __dirname;
 
@@ -29,6 +24,14 @@ async function findHashedFileName(directoryPath: any, regexTest: RegExp) {
   return files.find((filePath: string) => regexTest.test(filePath));
 }
 
+function nextBuild() {
+  execSync(`cd ${__dirname} && yarn build`, { cwd: __dirname });
+}
+
+beforeAll(async () => {
+  execSync(`cd ${__dirname} && yarn install --ignore-scripts`, { cwd: __dirname });
+});
+
 beforeEach(async () => {
   jest.setTimeout(20000);
   rimraf.sync(getNextBuildFilePath(''));
@@ -36,15 +39,13 @@ beforeEach(async () => {
 });
 
 test('withOffline builds a service worker file with auto-registration logic', async () => {
-  const nextConf = forceProd(withOffline());
-
-  await nextBuild(cwd, nextConf);
+  await nextBuild();
   accessSync(getNextBuildFilePath('service-worker.js'), constants.F_OK);
 
   // Check registration logic exists
-  // const mainFileName = await findHashedFileName(getNextBuildFilePath('static/runtime'), getFileHashRegex('main', 'js'));
-  // const mainFileContents = await readBuildFile(`static/runtime/${mainFileName}`);
-  // expect(mainFileContents).toEqual(expect.stringContaining('serviceWorker'));
+  const mainFileName = await findHashedFileName(getNextBuildFilePath('static/runtime'), getFileHashRegex('main', 'js'));
+  const mainFileContents = await readBuildFile(`static/runtime/${mainFileName}`);
+  expect(mainFileContents).toEqual(expect.stringContaining('serviceWorker'));
 });
 
 // test('withOffline builds a service worker file without auto-registration logic when the consumer opts out', async () => {

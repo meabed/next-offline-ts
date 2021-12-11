@@ -50,7 +50,7 @@ interface INextOfflineTsConfig extends NextConfig {
   nextAssetDirectory?: string;
 }
 
-export function withOffline(nextConfig: INextOfflineTsConfig = {}) {
+export function withOffline(nextConfig: INextOfflineTsConfig = {}): NextConfig {
   return {
     ...nextConfig,
     exportPathMap: exportSw(nextConfig),
