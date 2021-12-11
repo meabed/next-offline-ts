@@ -3,7 +3,7 @@
 </h1>
 
 <h2 align="center">
-  Maintained, Upgraded and improved version of next-offline, written in typescript, updated and tested to fix multiple issues in the original library
+  Maintained, Upgraded and improved version of <a href='https://github.com/hanford/next-offline'>next-offline</a>, written in typescript, updated and tested to fix multiple issues in the original library
 </h2>
 
 <p align="center">
