@@ -2,8 +2,9 @@
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 const { withPlugins } = require('next-compose-plugins');
 const withManifest = require('next-manifest');
-const withOffline = require('next-offline-ts');
+// const {nextOfflineTs} = require('next-offline-ts');
 const forceProd = require('./forceProd');
+const withOffline = require('next-offline-ts');
 
 const manifest = {
   output: './public/',
@@ -25,4 +26,4 @@ const manifest = {
   background_color: '#ffffff',
 };
 
-module.exports = withPlugins([[withManifest({ manifest })], [withOffline, { dontAutoRegisterSw: true }]]);
+module.exports = withPlugins([[withManifest({ manifest })], [withOffline({ dontAutoRegisterSw: true })]]);
