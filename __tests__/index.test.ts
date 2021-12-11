@@ -43,35 +43,34 @@ test('withOffline builds a service worker file with auto-registration logic', as
   accessSync(getNextBuildFilePath('service-worker.js'), constants.F_OK);
 
   // Check registration logic exists
-  const mainFileName = await findHashedFileName(getNextBuildFilePath('static/runtime'), getFileHashRegex('main', 'js'));
-  const mainFileContents = await readBuildFile(`static/runtime/${mainFileName}`);
+  const mainFileName = await findHashedFileName(getNextBuildFilePath('static/chunks'), getFileHashRegex('main', 'js'));
+  const mainFileContents = await readBuildFile(`static/chunks/${mainFileName}`);
   expect(mainFileContents).toEqual(expect.stringContaining('serviceWorker'));
 });
 
+test('withOffline includes static assets and build artifacts in its service worker pre-cache', async () => {
+  await nextBuild();
+  const serviceWorkerContents = await readBuildFile('service-worker.js');
+
+  // Check that various bundles are getting entered into pre-cache manifest
+  expect(serviceWorkerContents).toEqual(expect.stringContaining('/pages/_app-'));
+  expect(serviceWorkerContents).toEqual(expect.stringContaining('_next/static/chunks/main-'));
+
+  // Check that static asset copying via glob pattern is working as expected
+  expect(serviceWorkerContents).toEqual(expect.stringContaining('_next/public/image.jpg'));
+});
+
+// todo test in another config
 // test('withOffline builds a service worker file without auto-registration logic when the consumer opts out', async () => {
-//   const nextConf = forceProd(withOffline({dontAutoRegisterSw: true}));
 //
-//   await nextBuild(cwd, nextConf);
+//   await nextBuild();
 //   accessSync(getNextBuildFilePath('service-worker.js'), constants.F_OK);
 //
-//   const mainFileName = await findHashedFileName(getNextBuildFilePath('static/runtime'), getFileHashRegex('main', 'js'));
-//   const mainFileContents = await readBuildFile(`static/runtime/${mainFileName}`);
+//   const mainFileName = await findHashedFileName(getNextBuildFilePath('static/chunks'), getFileHashRegex('main', 'js'));
+//   const mainFileContents = await readBuildFile(`static/chunks/${mainFileName}`);
 //   expect(mainFileContents).not.toEqual(expect.stringContaining('serviceWorker'));
 // });
-//
-// test('withOffline includes static assets and build artifacts in its service worker pre-cache', async () => {
-//   const nextConf = forceProd(withOffline());
-//
-//   await nextBuild(cwd, nextConf);
-//   const serviceWorkerContents = await readBuildFile('service-worker.js');
-//
-//   // Check that various bundles are getting entered into pre-cache manifest
-//   expect(serviceWorkerContents).toEqual(expect.stringContaining('/pages/_app.js'));
-//   expect(serviceWorkerContents).toEqual(expect.stringContaining('_next/static/chunks/commons.'));
-//
-//   // Check that static asset copying via glob pattern is working as expected
-//   expect(serviceWorkerContents).toEqual(expect.stringContaining('_next/public/image.jpg'));
-// });
+
 //
 // test('withOffline pre-caches the generated manifest from withManifest', async () => {
 //   const nextConf = forceProd(

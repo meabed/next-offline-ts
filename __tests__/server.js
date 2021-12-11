@@ -1,3 +1,4 @@
+// @ts-nocheck
 // This file doesn't go through babel or webpack transformation.
 // Make sure the syntax and sources this file requires are compatible with the current node version you are running
 // See https://github.com/zeit/next.js/issues/1245 for discussions on Universal Webpack or universal Babel
@@ -5,6 +6,7 @@ const { createServer } = require('http');
 const { parse } = require('url');
 const { join } = require('path');
 const next = require('next');
+const { readFileSync } = require('fs');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -17,9 +19,11 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    if (pathname === '/service-worker.js') {
+    if (pathname.startsWith('/service-worker.js')) {
       const filePath = join(__dirname, '.next', pathname);
-      app.serveStatic(req, res, filePath);
+      res.writeHead(200, { 'content-type': 'application/javascript' });
+      res.write(readFileSync(filePath).toString());
+      res.end();
     } else {
       handle(req, res, parsedUrl);
     }
