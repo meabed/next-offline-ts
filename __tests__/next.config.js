@@ -2,7 +2,6 @@
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 const { withPlugins } = require('next-compose-plugins');
 const withManifest = require('next-manifest');
-// const {nextOfflineTs} = require('next-offline-ts');
 const forceProd = require('./forceProd');
 const withOffline = require('next-offline-ts');
 
