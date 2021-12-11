@@ -3,8 +3,12 @@ export function unregister() {
     navigator.serviceWorker.ready.then(function (registration) {
       registration
         .unregister()
-        .then()
-        .catch((e) => console.error(`Error in unregistering service-worker`, e));
+        .then((unRegistration) => {
+          console.log('SW unRegistered: ', unRegistration);
+        })
+        .catch((unRegistrationError) => {
+          console.error('SW unRegistration failed: ', unRegistrationError);
+        });
     });
   }
 }
