@@ -1,5 +1,5 @@
 import nextBuild from 'next/dist/build';
-import withOffline from 'next-offline-ts';
+import { withOffline } from 'next-offline-ts';
 import { accessSync, constants, readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
 import rimraf from 'rimraf';

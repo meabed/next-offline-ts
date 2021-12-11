@@ -17,3 +17,4 @@ examples
 .idea
 /.*
 renovate.json
+public
