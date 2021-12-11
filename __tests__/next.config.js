@@ -23,4 +23,14 @@ const manifest = {
   background_color: '#ffffff',
 };
 
-module.exports = withPlugins([withManifest({ manifest }), forceProd(withOffline({ dontAutoRegisterSw: true }))]);
+module.exports = withPlugins([
+  withManifest({ manifest }),
+  forceProd(
+    withOffline({
+      dontAutoRegisterSw: true,
+      workboxOpts: {
+        maximumFileSizeToCacheInBytes: 5000000,
+      },
+    }),
+  ),
+]);

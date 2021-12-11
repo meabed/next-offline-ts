@@ -2,7 +2,7 @@
   next-offline-ts
 </h1>
 <h2 align="center">
-WIP - upgraded and improved version of next-offline, written in typescript, updated and tested to fix multiple issues in the original library
+  Maintained, Upgraded and improved version of next-offline, written in typescript, updated and tested to fix multiple issues in the original library
 </h2>
 
 <p align="center">
@@ -40,7 +40,7 @@ If you haven't yet, create a `next.config.js` in your project.
 
 ```js
 // next.config.js
-const withOffline = require('next-offline-ts')
+const { withOffline } = require('next-offline-ts')
 
 const nextConfig = {
   ...
@@ -65,9 +65,8 @@ Next we need to make sure our the application is properly serving the service wo
 - [Service worker path](#service-worker-path)
 - [next export](#next-export)
 - [Development mode](#development-mode)
-- [Next Offline 5.0](#next-offline-ts-50)
-- [Contrbuting](#contributing)
-- [License](#license-(mit))
+- [Contributing](#contributing)
+- [License](#license-mit)
 
 ## Serving service worker
 Because service workers are so powerful, the API has some restrictions built in. For example, service workers must be served on the domain they're being used on - [you can't use a CDN](https://github.com/w3c/ServiceWorker/issues/940).
@@ -146,7 +145,7 @@ class App extends React.Component {
 If you're handling registration on your own, pass `dontAutoRegisterSw` to next-offline-ts.
 ```js
 // next.config.js
-const withOffline = require('next-offline-ts')
+const { withOffline } = require('next-offline-ts')
 
 module.exports = withOffline({ dontAutoRegisterSw: true })
 ```
@@ -161,7 +160,7 @@ Define a `workboxOpts` object in your `next.config.js` and it will gets passed t
 
 ```js
 // next.config.js
-const withOffline = require('next-offline-ts')
+const { withOffline } = require('next-offline-ts')
 
 const nextConfig = {
   workboxOpts: {
@@ -246,7 +245,7 @@ By default `next-offline-ts` has the following blanket runtime caching strategy.
 
 ```js
 // next.config.js
-const withOffline = require('next-offline-ts')
+const { withOffline } = require('next-offline-ts')
 
 module.exports = withOffline({
   workboxOpts: {
@@ -293,7 +292,7 @@ By default `next-offline-ts` will add a no-op service worker in development. If 
 
 ```js
 // next.config.js
-const withOffline = require('next-offline-ts')
+const { withOffline } = require('next-offline-ts')
 
 module.exports = withOffline({
   devSwSrc: '/path/to/my/dev/service-worker.js'
@@ -309,23 +308,15 @@ In next-offline-ts@6.0.0 we've rewritten the export functionality to work in mor
 
 You can read more about exporting at [Next.js docs]((https://github.com/zeit/next.js#static-html-export)) but next offline should Just Work™️.
 
-## next offline ts 5.0
-If you're upgrading to the latest version of `next-offline-ts` I recommend glancing at what's been added/changed inside of [Workbox in 5.x releases](https://github.com/GoogleChrome/workbox/releases) along with the 4.0 release which included the [breaking changes](https://github.com/GoogleChrome/workbox/releases/tag/v4.0.0). Next Offline's API hasn't changed, but a core dependency has!
-
 <hr />
 
 Questions? Feedback? [Please let me know](https://github.com/meabed/next-offline-ts/issues/new)
 
 ## Contributing
-`next-offline-ts` is a [lerna monorepo](https://lerna.js.org/)  which uses yarn workspaces. After cloning the repo, run the following
+Please feel free to open issues, ask questions and solve issues - All contributions are welcome
 
-```sh
-$ yarn bootstrap
-```
 
-This will ensure your development version of next-offline-ts is symlinked in the examples & tests which should allow you to quickly make changes!
-
-## License (MIT)
+## License MIT
 
 ```
 WWWWWW||WWWWWW
