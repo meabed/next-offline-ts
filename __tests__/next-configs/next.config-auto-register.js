@@ -1,7 +1,7 @@
 // @ts-nocheck
 const { withPlugins } = require('next-compose-plugins');
 const withManifest = require('next-manifest');
-const { withOffline } = require('../dist/index');
+const { withOffline } = require('next-offline-ts');
 const forceProd = require('./forceProd');
 
 const manifest = {

@@ -1,4 +1,4 @@
-import { accessSync, constants, readdirSync, readFileSync } from 'fs';
+import { accessSync, constants, copyFileSync, readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
 import rimraf from 'rimraf';
 import { execSync } from 'child_process';
@@ -28,6 +28,10 @@ function nextBuild() {
   execSync(`cd ${__dirname} && yarn build`, { cwd: __dirname });
 }
 
+function copyNextConfig(suffix: string = 'auto-register') {
+  copyFileSync(`${__dirname}/next-configs/next.config-${suffix}.js`, `${__dirname}/next.config.js`);
+}
+
 beforeAll(async () => {
   execSync(`cd ${__dirname} && yarn install --ignore-scripts`, { cwd: __dirname });
 });
@@ -39,9 +43,9 @@ beforeEach(async () => {
 });
 
 test('withOffline builds a service worker file with auto-registration logic', async () => {
+  copyNextConfig();
   await nextBuild();
   accessSync(getNextBuildFilePath('service-worker.js'), constants.F_OK);
-
   // Check registration logic exists
   const mainFileName = await findHashedFileName(getNextBuildFilePath('static/chunks'), getFileHashRegex('main', 'js'));
   const mainFileContents = await readBuildFile(`static/chunks/${mainFileName}`);
@@ -49,9 +53,9 @@ test('withOffline builds a service worker file with auto-registration logic', as
 });
 
 test('withOffline includes static assets and build artifacts in its service worker pre-cache', async () => {
+  copyNextConfig();
   await nextBuild();
   const serviceWorkerContents = await readBuildFile('service-worker.js');
-
   // Check that various bundles are getting entered into pre-cache manifest
   expect(serviceWorkerContents).toEqual(expect.stringContaining('/pages/_app-'));
   expect(serviceWorkerContents).toEqual(expect.stringContaining('_next/static/chunks/main-'));
@@ -60,16 +64,15 @@ test('withOffline includes static assets and build artifacts in its service work
   expect(serviceWorkerContents).toEqual(expect.stringContaining('_next/public/image.jpg'));
 });
 
-// todo test in another config
-// test('withOffline builds a service worker file without auto-registration logic when the consumer opts out', async () => {
-//
-//   await nextBuild();
-//   accessSync(getNextBuildFilePath('service-worker.js'), constants.F_OK);
-//
-//   const mainFileName = await findHashedFileName(getNextBuildFilePath('static/chunks'), getFileHashRegex('main', 'js'));
-//   const mainFileContents = await readBuildFile(`static/chunks/${mainFileName}`);
-//   expect(mainFileContents).not.toEqual(expect.stringContaining('serviceWorker'));
-// });
+test('withOffline builds a service worker file without auto-registration logic when the consumer opts out', async () => {
+  copyNextConfig('no-auto-register');
+  await nextBuild();
+  accessSync(getNextBuildFilePath('service-worker.js'), constants.F_OK);
+
+  const mainFileName = await findHashedFileName(getNextBuildFilePath('static/chunks'), getFileHashRegex('main', 'js'));
+  const mainFileContents = await readBuildFile(`static/chunks/${mainFileName}`);
+  expect(mainFileContents).not.toEqual(expect.stringContaining('serviceWorker'));
+});
 
 //
 // test('withOffline pre-caches the generated manifest from withManifest', async () => {
@@ -98,6 +101,6 @@ test('withOffline includes static assets and build artifacts in its service work
 //     }),
 //   );
 //
-//   await nextBuild(cwd, nextConf);
+//   await nextBuild();
 //   accessSync(getNextBuildFilePath(customSWDest), constants.F_OK);
 // });
