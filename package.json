@@ -29,7 +29,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,json}": "prettier --write",
-    "__tests__/**/*.{ts}": "prettier --write",
+    "__tests__/**/*.{ts|js|tsx|jsx}": "prettier --write",
     "./index.ts": "prettier --write"
   },
   "dependencies": {
