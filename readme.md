@@ -314,6 +314,11 @@ You can read more about exporting at [Next.js docs]((https://github.com/zeit/nex
 
 Questions? Feedback? [Please let me know](https://github.com/meabed/next-offline-ts/issues/new)
 
+## TODO
+- Fix test
+- Deploy examples
+- Update documentation about caching public assets `nextAssetDirectory` and `cacheStaticAsset`
+
 ## Contributing
 Please feel free to open issues, ask questions and solve issues - All contributions are welcome
 
