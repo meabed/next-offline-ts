@@ -8,18 +8,18 @@ import { NextConfig } from 'next';
 import { NextConfigComplete } from 'next/dist/server/config-shared';
 
 // Next build metadata files that shouldn't be included in the pre-cache manifest.
-const preCacheManifestBlacklist = ['react-loadable-manifest.json', 'build-manifest.json', /\.map$/];
+export const preCacheManifestBlacklist = ['react-loadable-manifest.json', 'build-manifest.json', /\.map$/];
 
-const defaultInjectOpts: InjectManifestOptions = {
+export const defaultInjectOpts: InjectManifestOptions = {
   swSrc: undefined,
   exclude: preCacheManifestBlacklist,
   modifyURLPrefix: {
-    'static/': '_next/static/',
-    'public/': '_next/public/',
+    'static/': '/',
+    'public/': '/',
   },
 };
 
-const defaultGenerateOpts: Partial<GenerateSWOptions> = {
+export const defaultGenerateOpts: Partial<GenerateSWOptions> = {
   exclude: preCacheManifestBlacklist,
   modifyURLPrefix: defaultInjectOpts.modifyURLPrefix,
   // As of Workbox v5 Alpha there isn't a well documented way to move workbox runtime into the directory
@@ -40,7 +40,7 @@ const defaultGenerateOpts: Partial<GenerateSWOptions> = {
   ],
 };
 
-interface INextOfflineTsConfig extends NextConfig {
+export interface INextOfflineTsConfig extends NextConfig {
   webpack?: any;
   devSwSrc?: string;
   dontAutoRegisterSw?: boolean;
@@ -50,6 +50,7 @@ interface INextOfflineTsConfig extends NextConfig {
   scope?: string;
   workboxOpts?: GenerateSWOptions;
   nextAssetDirectory?: string;
+  cacheStaticAsset?: boolean;
 }
 
 export function withOffline(nextConfig: INextOfflineTsConfig = {}): NextConfig {
@@ -85,6 +86,7 @@ export function withOffline(nextConfig: INextOfflineTsConfig = {}): NextConfig {
         registerSwPrefix = '',
         scope = '/',
         workboxOpts = {},
+        cacheStaticAsset = false,
         nextAssetDirectory = 'public',
       } = nextConfig;
 
@@ -96,12 +98,15 @@ export function withOffline(nextConfig: INextOfflineTsConfig = {}): NextConfig {
         config.plugins.push(new CopyWebpackPlugin({ patterns: [devSwSrc] }));
       } else if (!context.isServer) {
         // Only run once for the client build.
-        config.plugins.push(
-          // Workbox uses Webpack asset manifest to generate the SW's pre-cache manifest, so we need
-          // to copy the app's assets into the Webpack context so those are picked up.
-          new CopyWebpackPlugin({ patterns: [{ from: `${join(cwd(), nextAssetDirectory)}/**/*` }] }),
-          generateSw ? new GenerateSW({ ...defaultGenerateOpts, ...workboxOpts }) : new InjectManifest({ ...defaultInjectOpts, ...workboxOpts }),
-        );
+        if (cacheStaticAsset) {
+          config.plugins.push(
+            // Workbox uses Webpack asset manifest to generate the SW's pre-cache manifest, so we need
+            // to copy the app's assets into the Webpack context so those are picked up.
+            new CopyWebpackPlugin({ patterns: [{ from: `${join(cwd(), nextAssetDirectory)}/**/*` }] }),
+          );
+        }
+
+        config.plugins.push(generateSw ? new GenerateSW({ ...defaultGenerateOpts, ...workboxOpts }) : new InjectManifest({ ...defaultInjectOpts, ...workboxOpts }));
       }
 
       if (!skipDuringDevelopment) {

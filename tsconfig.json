@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "alwaysStrict": true,
     "noImplicitAny": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
