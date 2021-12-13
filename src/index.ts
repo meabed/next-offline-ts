@@ -19,8 +19,9 @@ const defaultInjectOpts: InjectManifestOptions = {
   },
 };
 
-const defaultGenerateOpts: Partial<GenerateSWOptions | InjectManifestOptions> = {
-  ...defaultInjectOpts,
+const defaultGenerateOpts: Partial<GenerateSWOptions> = {
+  exclude: preCacheManifestBlacklist,
+  modifyURLPrefix: defaultInjectOpts.modifyURLPrefix,
   // As of Workbox v5 Alpha there isn't a well documented way to move workbox runtime into the directory
   // required by Next. As a workaround, we inline the tree-shaken runtime into the main Service Worker file
   // at the cost of less reachability
