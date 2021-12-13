@@ -34,12 +34,12 @@
   },
   "dependencies": {
     "copy-webpack-plugin": "~10.1.0",
-    "workbox-webpack-plugin": "^6.4.2"
+    "workbox-webpack-plugin": "^6.4.2",
+    "@types/workbox-webpack-plugin": "5.1.8"
   },
   "devDependencies": {
     "@types/jest": "27.0.3",
     "@types/prettier": "2.4.2",
-    "@types/workbox-webpack-plugin": "5.1.8",
     "husky": "7.0.4",
     "jest": "27.4.4",
     "lint-staged": "12.1.2",
