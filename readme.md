@@ -2,10 +2,6 @@
   next-offline-ts
 </h1>
 
-<h2 align="center">
-  Maintained, Upgraded and improved version of <a href='https://github.com/hanford/next-offline'>next-offline</a>, written in typescript, updated and tested to fix multiple issues in the original library
-</h2>
-
 <p align="center">
 Use <a href='https://github.com/GoogleChrome/workbox'>Workbox</a> with <a href='https://github.com/zeit/next.js'>
 Next.js</a> and <br />easily enable offline functionality in your application!
@@ -20,6 +16,12 @@ Next.js</a> and <br />easily enable offline functionality in your application!
   </a>
   <img src="https://img.shields.io/github/repo-size/meabed/next-offline-ts-ts.svg" />
 </p>
+
+
+<h5 align="center">
+  Maintained, Upgraded and improved version of <a href='https://github.com/hanford/next-offline'>next-offline</a>, written in typescript, updated and tested to fix multiple issues in the original library
+</h5>
+
 
 <br/>
 
