@@ -8,7 +8,7 @@ import { NextConfig } from 'next';
 import { NextConfigComplete } from 'next/dist/server/config-shared';
 
 // Next build metadata files that shouldn't be included in the pre-cache manifest.
-export const preCacheManifestBlacklist = ['react-loadable-manifest.json', 'server/middleware-manifest.json', 'middleware-manifest.json', /\.map$/];
+export const preCacheManifestBlacklist = [/manifest\.json$/, /\.map$/];
 
 export const defaultInjectOpts: InjectManifestOptions = {
   swSrc: undefined,
