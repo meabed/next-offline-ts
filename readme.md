@@ -14,7 +14,6 @@ Next.js</a> and <br />easily enable offline functionality in your application!
   <a href="https://www.npmjs.com/package/next-offline-ts">
     <img src="https://img.shields.io/npm/v/next-offline-ts.svg?maxAge=3600&label=next-offline&colorB=007ec6">
   </a>
-  <img src="https://img.shields.io/github/repo-size/meabed/next-offline-ts-ts.svg" />
 </p>
 
 
