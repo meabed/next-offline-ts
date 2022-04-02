@@ -6,7 +6,7 @@ import { cwd } from 'node:process';
 import { exportSw } from './export';
 import { NextConfig } from 'next';
 import { NextConfigComplete } from 'next/dist/server/config-shared';
-import { WebpackInjectManifestOptions, GenerateSWOptions } from 'workbox-build';
+import { GenerateSWOptions, WebpackGenerateSWOptions, WebpackInjectManifestOptions } from 'workbox-build';
 
 // Next build metadata files that shouldn't be included in the pre-cache manifest.
 export const preCacheManifestBlacklist = [/-manifest\.js$/, /-manifest\.json$/, /\.map$/];
@@ -20,7 +20,8 @@ export const defaultInjectOpts: WebpackInjectManifestOptions = {
   },
 };
 
-export const defaultGenerateOpts: Partial<GenerateSWOptions> = {
+export const defaultGenerateOpts: Partial<WebpackGenerateSWOptions> = {
+  exclude: preCacheManifestBlacklist,
   modifyURLPrefix: defaultInjectOpts.modifyURLPrefix,
   // As of Workbox v5 Alpha there isn't a well documented way to move workbox runtime into the directory
   // required by Next. As a workaround, we inline the tree-shaken runtime into the main Service Worker file
