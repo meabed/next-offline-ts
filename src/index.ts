@@ -6,7 +6,7 @@ import { cwd } from 'node:process';
 import { exportSw } from './export';
 import { NextConfig } from 'next';
 import { NextConfigComplete } from 'next/dist/server/config-shared';
-import { GenerateSWOptions, WebpackGenerateSWOptions, WebpackInjectManifestOptions } from 'workbox-build';
+import { WebpackGenerateSWOptions, WebpackInjectManifestOptions } from 'workbox-build';
 
 // Next build metadata files that shouldn't be included in the pre-cache manifest.
 export const preCacheManifestBlacklist = [/-manifest\.js$/, /-manifest\.json$/, /\.map$/];
@@ -49,7 +49,7 @@ export interface INextOfflineTsConfig extends NextConfig {
   generateSw?: boolean;
   registerSwPrefix?: string;
   scope?: string;
-  workboxOpts?: GenerateSWOptions;
+  workboxOpts?: WebpackGenerateSWOptions;
   nextAssetDirectory?: string;
   cacheStaticAsset?: boolean;
 }
