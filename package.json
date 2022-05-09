@@ -42,7 +42,7 @@
     "@types/jest": "27.5.0",
     "@types/prettier": "2.6.0",
     "@types/rimraf": "3.0.2",
-    "husky": "8.0.0",
+    "husky": "8.0.1",
     "jest": "28.1.0",
     "lint-staged": "12.4.1",
     "next": "12.1.6",
