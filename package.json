@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@types/jest": "28.1.6",
-    "@types/prettier": "2.6.4",
+    "@types/prettier": "2.7.0",
     "@types/rimraf": "3.0.2",
     "husky": "8.0.1",
     "jest": "28.1.3",
