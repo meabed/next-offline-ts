@@ -36,7 +36,7 @@
   "dependencies": {
     "@types/workbox-webpack-plugin": "5.1.8",
     "copy-webpack-plugin": "~11.0.0",
-    "workbox-webpack-plugin": "^6.5.2"
+    "workbox-webpack-plugin": "^7.0.0"
   },
   "devDependencies": {
     "@types/jest": "29.5.1",
