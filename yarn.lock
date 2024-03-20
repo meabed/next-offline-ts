@@ -1938,10 +1938,12 @@
   resolved "https://registry.yarnpkg.com/@types/trusted-types/-/trusted-types-2.0.3.tgz#a136f83b0758698df454e328759dbd3d44555311"
   integrity sha512-NfQ4gyz38SL8sDNrSixxU2Os1a5xcdFxipAFxYEuLUlvU2uDwS4NUpsImcf1//SlWItCVMMLiylsxbmNMToV/g==
 
-"@types/workbox-webpack-plugin@5.1.8":
-  version "5.1.8"
-  resolved "https://registry.yarnpkg.com/@types/workbox-webpack-plugin/-/workbox-webpack-plugin-5.1.8.tgz#8c014df34877b6fab0c7d4aa85698445e1e0f64b"
-  integrity sha512-1RKsHinzZMDmMNS0OouyMQPEfL2oJr4oXPTGI3YwEuCOsIKDSce+l3KW1qY5IufXs3W2g/ZFlWD2X9SkmaSiZA==
+"@types/workbox-webpack-plugin@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/workbox-webpack-plugin/-/workbox-webpack-plugin-6.0.0.tgz#2a6590e439beb9d2935c178c05d6eb250bbe8142"
+  integrity sha512-DJUT0zLU0sSLWBqIQH8eUAymqjvDj+uxvvEuRtT5wKY4wjdG71hfnUu5DSyoV1rdhE2OmA/dMhxA238NqYrVTw==
+  dependencies:
+    workbox-webpack-plugin "*"
 
 "@types/yargs-parser@*":
   version "20.2.1"
@@ -5541,7 +5543,7 @@ workbox-sw@7.0.0:
   resolved "https://registry.yarnpkg.com/workbox-sw/-/workbox-sw-7.0.0.tgz#7350126411e3de1409f7ec243df8d06bb5b08b86"
   integrity sha512-SWfEouQfjRiZ7GNABzHUKUyj8pCoe+RwjfOIajcx6J5mtgKkN+t8UToHnpaJL5UVVOf5YhJh+OHhbVNIHe+LVA==
 
-workbox-webpack-plugin@^7.0.0:
+workbox-webpack-plugin@*, workbox-webpack-plugin@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/workbox-webpack-plugin/-/workbox-webpack-plugin-7.0.0.tgz#6c61661a2cacde1239192a5877a041a2943d1a55"
   integrity sha512-R1ZzCHPfzeJjLK2/TpKUhxSQ3fFDCxlWxgRhhSjMQLz3G2MlBnyw/XeYb34e7SGgSv0qG22zEhMIzjMNqNeKbw==
